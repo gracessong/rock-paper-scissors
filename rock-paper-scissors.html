@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock-paper-scissors Game</title>
+        <meta charset = 'utf-8'>
+    </head>
+    <body>
+        <script>
+            // initial scores //
+            let playerScore = 0;
+            let computerScore = 0;
+            
+            // begin play // 
+            function game() {
+                // obtain random computer input //
+                function computerPlay() {
+                    let selection = ['Rock', 'Paper', 'Scissors'];
+                    let computerSelection = selection[Math.floor(Math.random() * selection.length)];
+                    return computerSelection;
+                }
+                const computerSelection = computerPlay();
+
+                // obtain player input //
+                const playerSelection = window.prompt('Rock, paper, or scissors?', '');
+
+                const playerWin = `You win! ${playerSelection} beats ${computerSelection}.`;
+                const computerWin = `You lose! Your ${playerSelection} is crushed by ${computerSelection}.`;
+
+                // capitalize the player and computer input, determine who wins each round //  
+                function roundPlay(playerSelection, computerSelection) {
+                    let capPlayerSelection = playerSelection.toUpperCase();
+                    let capComputerSelection = computerSelection.toUpperCase();
+                    if (capPlayerSelection == 'ROCK' && capComputerSelection == 'SCISSORS' || capPlayerSelection == 'SCISSORS' && capComputerSelection == 'PAPER' || capPlayerSelection == 'PAPER' && capComputerSelection == 'ROCK') {
+                        playerScore += 1;
+                        return playerWin;
+                    } else if (capPlayerSelection == capComputerSelection) {
+                        return 'You tie! Play again.';
+                    } else {
+                        computerScore += 1;
+                        return computerWin;
+                    }
+                }
+
+                console.log(roundPlay(playerSelection, computerSelection));
+                console.log(`Your score is ${playerScore}.`);
+                console.log(`Computer's score is ${computerScore}.`);
+            }
+
+            game();
+            game();
+            game();
+            game();
+            game();
+
+            if (playerScore > computerScore) {
+                console.log('Congratulations, you defeated the computer!');
+            } else if (playerScore < computerScore) {
+                console.log('Boooooo! You\'re a disgrace to the humankind.');
+            } else {
+                console.log('You tied. Boring.')
+            }
+
+
+        </script>
+    </body>
+</html>
